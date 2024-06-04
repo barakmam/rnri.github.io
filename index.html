@@ -34,13 +34,7 @@
     <link rel="stylesheet" href="./static/css/index.css">
     <link rel="icon" href="./static/images/icon.png">
 
-<!--    <script type="text/x-mathjax-config">-->
-<!--        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});-->
-<!--    </script>-->
-<!--    <script type="text/javascript"-->
-<!--            src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">-->
-<!--    </script>-->
-
+    <!--    Latex Libs-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
           integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
@@ -49,6 +43,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"
             integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
             onload="renderMathInElement(document.body);"></script>
+    <!--   / Latex Libs-->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -114,6 +109,16 @@
                   <span>Code - coming soon</span>
                   </a>
               </span>
+                            <span class="link-block">
+<!--                <a href="https://huggingface.co/spaces/garibida/ReNoise-Inversion"-->
+                <a
+                        class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-laptop"></i>
+                  </span>
+                  <span>Demo - coming soon</span>
+                  </a>
+              </span>
                         </div>
                     </div>
                 </div>
@@ -142,19 +147,19 @@
         <div class="container column is-two-fifths">
             <h2 class="title is-3 has-text-centered">Real Time Editing</h2>
             <div id="results-carousel" class="carousel results-carousel">
-                <div class="item item-cat">
-                    <video id="cat" autoplay controls muted loop playsinline height="100%">
-                        <source src="./static/videos/cat.mp4" type="video/mp4">
+                <div class="item item-lion">
+                    <video id="lion" autoplay controls muted loop playsinline height="100%">
+                        <source src="./static/videos/lion.mp4" type="video/mp4">
                     </video>
                 </div>
-                <div class="item item-chair-tp">
+                <div class="item item-wine">
                     <video id="wine" autoplay controls muted loop playsinline height="100%">
                         <source src="./static/videos/wine.mp4" type="video/mp4">
                     </video>
                 </div>
-                <div class="item item-shiba">
-                    <video id="lion" autoplay controls muted loop playsinline height="100%">
-                        <source src="./static/videos/lion.mp4" type="video/mp4">
+                <div class="item item-cat">
+                    <video id="cat" autoplay controls muted loop playsinline height="100%">
+                        <source src="./static/videos/cat.mp4" type="video/mp4">
                     </video>
                 </div>
             </div>
@@ -250,7 +255,8 @@
             <div class="column is-four-fifths">
                 <h2 class="title is-3">Inversion Pipeline</h2>
                 <img src="./static/images/NRI_diagram.png" alt="">
-                Newton-Raphson Inversion iterates over the obejective function \(\mathcal{F}(z_t)\). at every time step
+                Newton-Raphson Inversion iterates over the obejective function \\(\mathcal{F}(z_t)\\). at every time
+                step
                 in
                 the inversion path. It starts with \(z_t^0=z_{t-1}\) and quickly converges (within 2 iterations) to
                 \(z_t\).
