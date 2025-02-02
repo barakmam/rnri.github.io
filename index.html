@@ -6,7 +6,7 @@
           content="Regularized Newton Raphson Inversion used to invert and edit images using text to image diffusion models.">
     <meta name="keywords" content="RNRI, Inversion, Image-editing, Diffusion Model">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>RNRI: Regularized Newton Raphson Inversion for Text-to-Image Diffusion Models</title>
+    <title>GNRI: Lightning-fast Image Inversion and Editing for Text-to-Image Diffusion Models</title>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
@@ -59,20 +59,24 @@
             <div class="columns is-centered">
                 <div class="column has-text-centered">
                     <h1 class="title is-1 publication-title">
-                        RNRI: Regularized Newton Raphson Inversion for Text-to-Image Diffusion Models</h1>
+                        GNRI: Lightning-fast Image Inversion and Editing for Text-to-Image Diffusion Models</h1>
                     <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://github.com/dvirsamuel">Dvir Samuel</a><sup>1,3</sup>,</span>
                         <span class="author-block">
               <a href="https://github.com/barakmam">Barak Meiri</a><sup>1,2</sup>,</span>
                         <span class="author-block">
+              <a href="https://github.com/barakmam">Haggai Maron</a><sup>4,5</sup>,</span>
+                        <span class="author-block">
+              <a href="https://github.com/barakmam">Yoad Tewel</a><sup>2,5</sup>,</span>
+                        <span class="author-block">
               <a href="https://scholar.google.com/citations?user=Mf06N8kAAAAJ&hl=en">Nir Darshan</a><sup>1</sup>,
             </span>
                         <span class="author-block">
-              <a href="https://scholar.google.com/citations?user=Wk2gAZUAAAAJ&hl=iw">Gal Chechik</a><sup>3,4</sup>,
+              <a href="https://scholar.google.com/citations?user=hpItE1QAAAAJ&hl=en">Shai Avidan</a><sup>2</sup>,
             </span>
                         <span class="author-block">
-              <a href="https://scholar.google.com/citations?user=hpItE1QAAAAJ&hl=en">Shai Avidan</a><sup>2</sup>,
+              <a href="https://scholar.google.com/citations?user=Wk2gAZUAAAAJ&hl=iw">Gal Chechik</a><sup>3,5</sup>,
             </span>
                         <span class="author-block">
               <a href="http://www.benarirami.com">Rami Ben-Ari</a><sup>1</sup>,
@@ -83,7 +87,8 @@
                         <span class="author-block"><sup>1</sup>OriginAI,</span>
                         <span class="author-block"><sup>2</sup>Tel Aviv University,</span>
                         <span class="author-block"><sup>3</sup>Bar Ilan University,</span>
-                        <span class="author-block"><sup>4</sup>NVIDIA Research</span>
+                        <span class="author-block"><sup>4</sup>Technion,</span>
+                        <span class="author-block"><sup>5</sup>NVIDIA Research</span>
                     </div>
 
                     <div class="column has-text-centered">
@@ -131,9 +136,7 @@
         <div class="hero-body">
             <img src="./static/images/figure1_editing.png" alt="">
             <h2 class="subtitle has-text-centered">
-                Image editing using our RNRI for inversion demonstrates significant speed-up
-                and improved quality compared to previous state-of-the-art methods.
-                Results are shown for both Latent Diffusion models and fast Latent consistency models.
+                Consecutive real image inversions and editing using our GNRI with Flux.
             </h2>
         </div>
     </div>
@@ -173,7 +176,7 @@
             </div>
             <h2 class="subtitle has-text-centered">
                 The videos are running in real time speed.
-                RNRI enables fast and accurate text-to-image editing using diffusion models.
+                GNRI enables fast and accurate text-to-image editing using diffusion models.
             </h2>
         </div>
     </div>
@@ -189,8 +192,8 @@
                     <h2 class="title is-3">Editing Examples</h2>
                     <img src="./static/images/supp_editing_same.png" alt="">
                     <h2 class="subtitle has-text-centered">
-                        Various editing with same input: Note the RNRI capability in both subtle
-                        and extensive changes as one would expect from the particular prompt change.
+                        Various editing with same input: Note the GNRI capability in both subtle and extensive
+                        changes as one would expect from the particular prompt change.
                     </h2>
                 </div>
             </div>
@@ -221,32 +224,29 @@
                     <h2 class="title is-3">Abstract</h2>
                     <div class="content has-text-justified">
                         <p>
-                            Diffusion inversion is the problem of taking an image and a text prompt that describes it,
-                            and finding a noise latent that would generate the image. Most current inversion techniques
-                            operate by approximately solving an implicit equation, and may converge slowly or yield poor
-                            reconstructed images.
+                            Diffusion inversion is the problem of taking an image and a text prompt that describes
+                            it and finding a noise latent that would generate the exact same image.
+                            Most current deterministic inversion techniques operate by approximately solving an implicit
+                            equation and may converge slowly or yield poor reconstructed images.
                         </p>
                         <p>
-                            Here, we formulate the problem as finding the roots of an implicit equation and design a
-                            method
-                            to solve it efficiently. Our solution is based on Newton-Raphson (NR), a well-known
-                            technique in
-                            numerical analysis. A naive application of NR may be computationally infeasible and tends to
-                            converge to incorrect solutions.
-                            We describe an efficient regularized formulation that converges quickly to solution that
-                            provide
-                            high-quality reconstructions.
-                            We also identify a source of inconsistency stemming from prompt conditioning during the
-                            inversion
-                            process, which significantly degrades the inversion quality. To address this, we introduce a
-                            prompt-aware adjustment of the encoding, effectively correcting this issue.
+                            We formulate the problem by finding the roots of an implicit equation and devlop a method to
+                            solve it efficiently. Our solution is based on Newton-Raphson
+                            (NR), a well-known technique in numerical analysis. We show that a vanilla application of NR
+                            is computationally infeasible while naively transforming it to a
+                            computationally tractable alternative tends to converge to out-of-distribution solutions,
+                            resulting in poor reconstruction and editing.
+                            We therefore derive an efficient guided formulation that fastly converges and provides
+                            high-quality reconstructions and editing.
+                            We showcase our method on real image editing with three popular
+                            open-sourced diffusion models: Stable Diffusion, SDXL-Turbo, and Flux with
+                            different deterministic scheduler.
                         </p>
                         <p>
-                            Our solution, <b>R</b>egularized <b>N</b>ewton-<b>R</b>aphson <b>I</b>nversion, inverts an
-                            image within 0.5 sec for
-                            latent consistency models, opening the door for interactive image editing.
-                            We further demonstrate improved results in image interpolation and generation of rare
-                            objects.
+                            Our solution, <b>G</b>uided <b>N</b>ewton-<b>R</b>aphson <b>I</b>nversion, inverts an image
+                            within 0.4 sec (on an A100 GPU) for few-step models (SDXL-Turbo and Flux.1), opening the
+                            door for interactive image editing.
+                            We further show improved results in image interpolation and generation of rare objects.
                             <br>
                             <br>
                         </p>
@@ -282,14 +282,13 @@
     <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
             <h2 class="title is-3">PSNR & Run Time Results</h2>
-            <img src="./static/images/psnr_iter.png" alt="">
-            (a) Convergence rate. Comparison of iterative methods in an image inversion-reconstruction task over the
-            COCO validation set. The mean PSNR of reconstructed images is
-            plotted against the number of iterations. The dashed line represents the upper bound on reconstruction
-            quality determined by the VAE in Stable Diffusion. Mean convergence time (in seconds) is
-            denoted for each method. Our RNRI achieves a PSNR close to the upper limit and converges within
-            only 1-2 iterations. <br>(b) Prior effect on convergence. Incorporating our prior not only aids in finding
-            the correct solution but also accelerates convergence.
+            <img src="./static/images/inversion_qual.png" alt="">
+            (Left) Reconstruction qualitative results: Comparing image inversion-reconstruction
+            performance. While all baseline methods struggle to preserve the original image, GNRI successfully
+            excels in accurately reconstructing it. (Right) Inversion Results: Mean reconstruction quality (y-
+            axis, PSNR) and runtime (x-axis, seconds) on the COCO2017 validation set. Our method achieves
+            high PSNR while reducing inversion-reconstruction time by a factor of ×2 to ×40 on SDXL-turbo
+            and ×10 to ×40 on Flux.1, compared to other approaches.
         </div>
     </div>
     <!--/ PSNR Results. -->
@@ -299,9 +298,9 @@
     <div class="container is-max-desktop content">
         <h2 class="title">BibTeX</h2>
         <pre><code>@misc{samuel2023regularized,
-  author    = {Dvir Samuel and Barak Meiri and Nir Darshan and Shai Avidan and Gal Chechik and Rami Ben-Ari},
-  title     = {Regularized Newton Raphson Inversion for Text-to-Image Diffusion Models},
-  year      = {2023}
+  author    = {Dvir Samuel and Barak Meiri and Haggai Maron and Yoad Tewel and Nir Darshan and Shai Avidan and Gal Chechik and Rami Ben-Ari},
+  title     = {Lightning-fast Image Inversion and Editing for Text-to-Image Diffusion Models},
+  year      = {2024}
 }</code></pre>
         <!--  journal   = {ICCV},-->
     </div>
